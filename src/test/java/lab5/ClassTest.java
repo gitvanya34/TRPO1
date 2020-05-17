@@ -38,9 +38,7 @@ public class ClassTest {
         driver.findElement(By.id("password")).sendKeys( "dfghjnbvcx");
         driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
         driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
-     //   driver.findElement(By.className("toggle-link link_has-no-phone")).click();
-
-        // Assert.assertEquals("", driver.findElement(By.className("create_account_error")).getText());
+        Assert.assertTrue(driver.getTitle().equals("Регистрация"));
     }
 
     @DataProvider(name = "Test1_Data1")
