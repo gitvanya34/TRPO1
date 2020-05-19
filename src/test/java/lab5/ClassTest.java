@@ -120,13 +120,22 @@ public class ClassTest {
     {
         System.out.println("Тест 1. Позитивный тест Math.abs(n) (корректные значения) ");
 
-        int res =Math.abs(n) ;
-        System.out.println("n = " + n);
-        System.out.println("Модуль n = " + res);
-        Assert.assertEquals(res,  n=n < 0 ? -n : n);
 
-        Assert.assertFalse(n <= 0 ?true:false, "Модуль посчитан неверно");
 
+        int res =Math.abs(n);
+        try {
+
+            System.out.println("n = " + n);
+            System.out.println("Модуль n = " + res);
+            Assert.assertEquals(res,  n=n < 0 ? -n : n);
+            Assert.assertFalse(res==-2147483648, "Особая задукументированная ситуация");
+        }
+        catch (AssertionError e)
+        {
+            System.out.println("java.lang.AssertionError: Модуль посчитан неверно expected [false] but found [true]");
+            System.out.println("Текущее исключение: " + e);
+            Assert.assertEquals(e.toString(),"java.lang.AssertionError: Особая задукументированная ситуация expected [false] but found [true]");
+        }
         System.out.println();
     }
 
