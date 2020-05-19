@@ -7,49 +7,56 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import org.testng.collections.Lists;
+
 import java.lang.Math;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 //import java.util.Scanner;
 
 
 public class ClassTest {
 
     private WebDriver driver;
-    private int count=6;//количество строк в датапровайдере
+    private int count=1;//количество строк в датапровайдере
 
-    @BeforeClass()
-    public void setUp() {
-      //  count=6;
-        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.get("https://passport.yandex.ru/registration/mail?from=mail&origin=home_desktop_ru&retpath=https%3A%2F%2Fmail.yandex.ru%2F");
+//    @BeforeClass()
+//    public void setUp() {
+//      //  count=6;
+//        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+//        driver = new FirefoxDriver();
+//        driver.get("https://passport.yandex.ru/registration/mail?from=mail&origin=home_desktop_ru&retpath=https%3A%2F%2Fmail.yandex.ru%2F");
+//
+//    }
+//
+//    @AfterClass()
+//    public void downUp(){
+//
+//        driver.quit();
+//    }
 
-    }
-
-    @AfterClass()
-    public void downUp(){
-        driver.quit();
-    }
-
-    @Test()
-    public void WebTest() {
-        driver.findElement(By.id("firstname")).sendKeys( "Иван");
-        driver.findElement(By.id("lastname")).sendKeys( "Иванов");
-        driver.findElement(By.id("login")).sendKeys( "djgnks");
-        driver.findElement(By.id("password")).sendKeys( "dfghjnbvcx");
-        driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
-        driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
-        Assert.assertTrue(driver.getTitle().equals("Регистрация"));
-    }
+//    @Test()
+//    public void WebTest() {
+//        driver.findElement(By.id("firstname")).sendKeys( "Иван");
+//        driver.findElement(By.id("lastname")).sendKeys( "Иванов");
+//        driver.findElement(By.id("login")).sendKeys( "djgnks");
+//        driver.findElement(By.id("password")).sendKeys( "dfghjnbvcx");
+//        driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
+//        driver.findElement(By.id("password_confirm")).sendKeys( "dfghjnbvcx");
+//        Assert.assertTrue(driver.getTitle().equals("Регистрация"));
+//    }
 
     @DataProvider(name = "Test1_Data1")
     public Object[][] Data1()
     {
-        Object[][] obj=new Object[count][1];
-               for(int i=0; i<count;i++)
-               {
-                   obj[i][0]=(int)(Math.random() * Integer.MAX_VALUE - 1)+(int)(Math.random() * Integer.MIN_VALUE + 1);
-               }
-        return  obj;
+//        Object[][] obj=new Object[count][1];
+//               for(int i=0; i<count;i++)
+//               {
+//                   obj[i][0]=(int)(Math.random() * Integer.MIN_VALUE );
+//               }
+        return  new Object[][]{{Integer.MIN_VALUE},{Integer.MAX_VALUE},{-1}};
     }
 
     @DataProvider(name = "Test2_Data1")
@@ -67,12 +74,19 @@ public class ClassTest {
     @DataProvider(name = "Test2_Data2")
     public Object[][] Data3()
     {
-        Object[][] obj=new Object[count][1];
+        List<Object[]> result = Lists.newArrayList();
+
+        Object[][] obj1=new Object[count][1];
         for(int i=0; i<count;i++)
         {
-            obj[i][0]=(int)(Math.random() * Integer.MAX_VALUE);
+            obj1[i][0]=(int)(Math.random() * Integer.MAX_VALUE);
         }
-        return  obj;
+        Object[][] obj2=new Object[][]{{0},{1},{2}};
+
+        result.addAll(Arrays.asList(obj1));
+        result.addAll(Arrays.asList(obj2));
+
+        return result.toArray(new Object[result.size()][]);
     }
 
     @DataProvider(name = "Test2_Data3")
@@ -110,6 +124,8 @@ public class ClassTest {
         System.out.println("n = " + n);
         System.out.println("Модуль n = " + res);
         Assert.assertEquals(res,  n=n < 0 ? -n : n);
+
+        Assert.assertFalse(n <= 0 ?true:false, "Модуль посчитан неверно");
 
         System.out.println();
     }
