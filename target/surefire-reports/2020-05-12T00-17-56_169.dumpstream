@@ -1,0 +1,4 @@
+# Created at 2020-05-12T00:17:56.984
+Boot Manifest-JAR contains absolute paths in classpath 'D:\gomno\lab5.1.1\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+

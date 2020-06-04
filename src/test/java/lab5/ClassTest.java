@@ -113,7 +113,10 @@ public class ClassTest {
         }
         return  obj;
     }
-
+    public long abs(long n)
+    {
+        return n=n < 0 ? -n : n;
+    }
 
     @Test(dataProvider = "Test1_Data1")
     public void FirstModule(int n)
@@ -121,18 +124,20 @@ public class ClassTest {
         System.out.println("Тест 1. Позитивный тест Math.abs(n) (корректные значения) ");
 
 
-
-        int res =Math.abs(n);
+        long res2 =abs(n);
+        int res1 =Math.abs(n);
         try {
 
             System.out.println("n = " + n);
-            System.out.println("Модуль n = " + res);
-            Assert.assertEquals(res,  n=n < 0 ? -n : n);
-            Assert.assertFalse(res==-2147483648, "Особая задукументированная ситуация");
+            System.out.println("Math.abs() = " + res1);
+            System.out.println("Модуль n = " + res2);
+           if(res1==Integer.MIN_VALUE)
+            Assert.assertFalse(res1==Integer.MIN_VALUE, "Особая задукументированная ситуация");
+            else Assert.assertEquals(res1, res2);
         }
         catch (AssertionError e)
         {
-            System.out.println("java.lang.AssertionError: Модуль посчитан неверно expected [false] but found [true]");
+            System.out.println("Ожидаемое исключение: java.lang.AssertionError: Особая задукументированная ситуация [false] but found [true]");
             System.out.println("Текущее исключение: " + e);
             Assert.assertEquals(e.toString(),"java.lang.AssertionError: Особая задукументированная ситуация expected [false] but found [true]");
         }
